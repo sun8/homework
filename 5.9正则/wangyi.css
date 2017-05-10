@@ -1,0 +1,284 @@
+.warp {
+    width: 1342px;
+    height: 1000px;
+    background: url(images/8.jpg) no-repeat;
+}
+
+.wangyi {
+    width: 960px;
+    //height: 718px;
+    margin: 0 auto;
+    background-color: #f9f9f9;
+}
+
+.head {
+    height: 27px;
+    padding: 30px 4px 24px 0;
+}
+
+.wang,
+.wang1,
+.wang2 {
+    height: 27px;
+    text-indent: -999px;
+    ;
+}
+
+.wang {
+    width: 107px;
+    background: url(images/wangyi.png) no-repeat left 3px;
+}
+
+.wang1 {
+    width: 108px;
+    background: url(images/126.png) no-repeat left 4px;
+    margin: 0 22px 0 23px;
+}
+
+.wang2 {
+    width: 115px;
+    background: url(images/yawu.png) no-repeat left 1px;
+}
+
+.shu {
+    width: 1px;
+    height: 26px;
+    background-color: #a899a8;
+    margin: 0 12px 1px 17px;
+}
+
+.title {
+    font: 20px/24px "微软雅黑";
+    color: #545251;
+}
+
+.chaining a {
+    color: #003399;
+    font: 12px/27px "宋体";
+}
+
+.shu1 {
+    width: 1px;
+    height: 12px;
+    background-color: #a899a8;
+    margin: 8px 7px 7px;
+}
+
+.welcome {
+    height: 34px;
+    border: 1px #5b88b8 solid;
+    border-bottom: none;
+    border-radius: 4px;
+    background-image: url(images/bg.png);
+    font: 14px/34px "";
+    padding-left: 20px;
+    color: #fff;
+}
+
+.sec {
+    border: 1px #e0e0e0 solid;
+    border-top: none;
+}
+
+.enroll {
+    width: 642px;
+    border-right: 1px #e0e0e0 solid;
+    background-color: #fff;
+}
+
+.mail {
+    width: 497px;
+    height: 34px;
+    margin: 50px 0 34px 145px;
+}
+
+#login,
+#phone1,
+#enroll {
+    display: none;
+}
+
+.zimu,
+.phone {
+    width: 166px;
+    height: 32px;
+    border: 1px #0e529a solid;
+    background: url(images/zimu.png);
+    text-align: center;
+    font: 15px/37px "";
+    color: #fff;
+}
+
+.mail .phone {
+    border: 1px #b5b5b5 solid;
+    border-left: none;
+    background: #fff;
+    color: #555555;
+}
+
+.address {
+    margin-bottom: 12px;
+}
+
+.add {
+    width: 135px;
+    height: 27px;
+    font: 14px/27px "";
+    color: #555555;
+    text-align: right;
+    margin-right: 10px;
+}
+
+.mark {
+    color: #cd003f;
+    margin-right: 5px;
+}
+
+.tex {
+    width: 210px;
+    height: 25px;
+    border: 1px #ababab solid;
+    border-radius: 3px;
+    text-indent: 5px;
+    line-height: 25px;
+    color: #999999;
+}
+
+.ait {
+    width: 14px;
+    height: 12px;
+    background: url(images/ait.png);
+    margin: 7px 5px;
+}
+
+.dow {
+    width: 98px;
+    height: 25px;
+    border: 1px #abadb3 solid;
+    font: bold 13px/25px "微软雅黑";
+    color: #7f5555;
+}
+
+.parter2 {
+    height: 34px;
+    margin-left: 145px;
+    font: 12px/34px "";
+    color: #999999;
+}
+
+.pas {
+    width: 332px;
+    height: 25px;
+    border: 1px #ababab solid;
+    border-radius: 3px;
+}
+
+.code {
+    width: 122px;
+    height: 52px;
+    margin-left: 4px;
+}
+
+.parter1 .tex {
+    width: 206px;
+}
+
+.testing {
+    width: 122px;
+    text-align: center;
+    font: 12px/34px "";
+    color: #003399;
+    margin-left: 21px;
+}
+
+.article {
+    height: 40px;
+    padding-left: 149px;
+}
+
+.click {
+    margin-top: 14px;
+    margin-right: 8px;
+}
+
+.writing {
+    font: 12px/40px "";
+    color: #999999;
+}
+
+.article a {
+    color: #003399;
+}
+
+.enroll1 {
+    width: 117px;
+    height: 35px;
+    border: 1px #43952e solid;
+    margin: 6px 0 0 146px;
+    display: inline-block;
+    background-color: #44a52e;
+    font: bold 15px/35px "";
+    color: #fff;
+    text-align: center;
+}
+
+.flow {
+    width: 315px;
+    height: 547px;
+    background: #f5f5f5 url(images/trial.png) no-repeat 52px 105px;
+    position: relative;
+}
+
+.watch {
+    position: absolute;
+    top: 315px;
+    right: 35px;
+    width: 56px;
+    height: 25px;
+    background-color: #c5d6e7;
+    border-radius: 4px;
+    font: 14px/25px "微软雅黑";
+    color: #729ac7;
+    text-align: center;
+}
+
+.foot {
+    padding-left: 211px;
+}
+
+.p_left a {
+    float: left;
+    font: 12px/42px "";
+    color: #999999;
+    margin-right: 9px;
+}
+
+.shu2 {
+    width: 1px;
+    height: 12px;
+    background-color: #a899a8;
+    margin: 15px 10px 0 2px;
+}
+
+.p_right {
+    font: 12px/42px "";
+    color: #999999;
+}
+
+.cop {
+    margin: 0 6px;
+    font: 25px/45px "";
+}
+
+.tim {
+    font: 12px/42px "";
+    color: #999999;
+}
+
+.active1 {
+    box-shadow: 0 0 4px 4px red;
+}
+
+.active2 {
+    box-shadow: 0 0 4px 4px blueviolet;
+}
