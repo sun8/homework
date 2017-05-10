@@ -46,6 +46,7 @@ input,textarea,select,option,fieldset,legend{
 	border:0;
 	background:none ;
 	vertical-align: top;
+	outline: none;
 }
 	
 

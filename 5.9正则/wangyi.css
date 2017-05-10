@@ -276,9 +276,9 @@
 }
 
 .active1 {
-    box-shadow: 0 0 4px 4px red;
+    box-shadow: 0 0 2px 2px palevioletred;
 }
 
 .active2 {
-    box-shadow: 0 0 4px 4px blueviolet;
+    box-shadow: 0 0 2px 2px cadetblue;
 }
