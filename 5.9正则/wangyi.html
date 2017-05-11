@@ -126,6 +126,18 @@
     	var form = document.getElementsByTagName('form')[0];
         var inps = form.getElementsByTagName('input');
         var enroll1 = document.getElementsByClassName('enroll1')[0];
+        var inp = Array.prototype.slice.call(inps);
+		inp.pop();
+		inp.pop();
+		inp.pop();
+		inp.pop();
+		//var inp = Array.from(inps)
+		
+		//禁止点击提交
+        enroll1.disabled = 'disabled';
+        //查看每个人身上是否都有active名字
+        var onoff = null;
+        
         function Fn(ele, re) {
             this.form = document.getElementsByTagName('form')[0];
             this.init(ele, re);
@@ -139,6 +151,15 @@
 				}else{
 					_this.change(this, re);
 				}
+				if(inp.every(function(a,b){
+			return a.classList.contains('active2')
+		})){
+			alert(1)
+			onoff = true;
+            enroll1.disabled = '';
+            enroll1.classList.add('active3');
+                
+		}
 			}
         }
         Fn.prototype.change = function(that, re) {
@@ -152,6 +173,7 @@
             if (!that.value) {
                 that.classList.remove('active1');
             }
+            
         }
 
 
@@ -210,26 +232,11 @@
       //    生日
         var birstday = new Fn('birstday', /^(19[2-9][0-9]-\d{2}-\d{2})$/g);
 
-		var inp = Array.prototype.slice.call(inps);
-		inp.pop();
-		inp.pop();
-		inp.pop();
-		inp.pop();
-		//var inp = Array.from(inps)
 		
-		//禁止点击提交
-        enroll1.disabled = 'disabled';
-        //查看每个人身上是否都有active名字
-        var onoff = null;
-		if(inp.every(function(a,b){
-			return a.classList.contains('active2')
-		})){
-			alert(1)
-			onoff = true;
-                enroll1.disabled = '';
-                enroll1.classList.add('active3');
-                
-		}
+//      console.log(inp.every(function(a,b){
+//			return a.classList.contains('active2')
+//		}))
+		
         
         
         
