@@ -123,44 +123,41 @@
         </div>
     </div>
     <script>
+    	var form = document.getElementsByTagName('form')[0];
+        var inps = form.getElementsByTagName('input');
+        var enroll1 = document.getElementsByClassName('enroll1')[0];
         function Fn(ele, re) {
             this.form = document.getElementsByTagName('form')[0];
-            this.onoff = null;
-            this.arr = [];
             this.init(ele, re);
         }
         Fn.prototype.init = function(ele, re) {
             var _this = this;
             this.form[ele].oninput = function() {
-
-                _this.change(this, re);
-
-            }
+				if(ele=='birstday'){
+					_this.arr = _this.form[ele].value.split('-');
+	              	_this.change1(this, re, _this.arr);
+				}else{
+					_this.change(this, re);
+				}
+			}
         }
         Fn.prototype.change = function(that, re) {
             if (re.test(that.value)) {
-                that.classList.add('active2')
-                this.onoff = true;
+                that.classList.add('active2');
+                that.classList.remove('active1');
             } else {
-                that.classList.add('active1')
-                that.classList.remove('active2')
+                that.classList.add('active1');
+                that.classList.remove('active2');
             }
             if (!that.value) {
-                that.classList.remove('active1')
+                that.classList.remove('active1');
             }
         }
 
 
         function Fn1(ele, re) {
-            this.form = document.getElementsByTagName('form')[0]; //value值要小于等于当前戳的时间点
-            this.data = new Date();
-            this.year = this.data.getFullYear();
-            this.mouth = this.data.getMonth() + 1;
-            this.day = this.data.getDate();
-            this.str = this.year + '-' + two(this.mouth) + '-' + two(this.day);
-            //正则匹配格式及长度
-            // var re = /^(\d{4}-\d{2}-\d{2})$/g;
-            //拿value去设置时间，然后获取时间，然后比较是否相等
+            this.form = document.getElementsByTagName('form')[0]; 
+            
             this.init(ele, re);
         }
         Fn1.prototype.init = function(ele, re) {
@@ -170,7 +167,16 @@
                 _this.change(this, re, _this.arr);
             }
         }
-        Fn1.prototype.change = function(that, re, arr) {
+        Fn.prototype.change1 = function(that, re, arr) {
+        	//value值要小于等于当前戳的时间点
+        	this.data = new Date();
+            this.year = this.data.getFullYear();
+            this.mouth = this.data.getMonth() + 1;
+            this.day = this.data.getDate();
+            this.str = this.year + '-' + two(this.mouth) + '-' + two(this.day);
+            //正则匹配格式及长度
+            // var re = /^(\d{4}-\d{2}-\d{2})$/g;
+            //拿value去设置时间，然后获取时间，然后比较是否相等
             this.data1 = new Date();
             this.data1.setFullYear(arr[0]);
             this.data1.setMonth(arr[1] - 1);
@@ -179,41 +185,62 @@
             this.mouth1 = this.data1.getMonth() + 1;
             this.day1 = this.data1.getDate();
             this.str1 = this.year1 + '-' + two(this.mouth1) + '-' + two(this.day1);
-            if (that.value <= this.str && re.test(that.value) && that.value == this.str1) {
-                that.classList.add('active2')
-                onoff = true;
+            if (that.value <= this.str && re.test(that.value) && that.value == this.str1){
+                that.classList.add('active2');
+                that.classList.remove('active1');
             } else {
-                that.classList.add('active1')
-                that.classList.remove('active2')
+                that.classList.add('active1');
+                that.classList.remove('active2');
             }
             if (!that.value) {
-                that.classList.remove('active1')
+                that.classList.remove('active1');
             }
-        }
+          }
 
-
+		//邮箱
         var email = new Fn('em', /^[a-zA-Z]\w{5,17}$/);
+        //密码
         var passwor = new Fn('passwor', /^\w{6,16}$/);
+        //电话
         var plone = new Fn('plone', /^1[34578][0-9]{9}$/);
+        //QQ
         var qq = new Fn('qq', /^[1-9][0-9]{4,9}$/);
+        //网址
         var net = new Fn('net', /[a-zA-Z]+:\/\/[^\s]*/);
-        var birstday = new Fn1('birstday', /^(\d{4}-\d{2}-\d{2})$/g);
+      //    生日
+        var birstday = new Fn('birstday', /^(19[2-9][0-9]-\d{2}-\d{2})$/g);
 
-
-        var form = document.getElementsByTagName('form')[0];
-        var inps = form.getElementsByTagName('input');
-        var enrol2 = document.getElementById('enrol2');
-        enrol2.disabled = 'disabled';
-        for (var i = 0; i < inps.length - 2; i++) {
-            if (inps[i].classList.contains('active2')) {
-                enrol2.disabled = '';
-            }
-        }
-
-        enrol2.onclick = function() {
-            var net = form.net.value;
-            this.classList.add('active3')
-            open(net)
+		var inp = Array.prototype.slice.call(inps);
+		inp.pop();
+		inp.pop();
+		inp.pop();
+		inp.pop();
+		//var inp = Array.from(inps)
+		
+		//禁止点击提交
+        enroll1.disabled = 'disabled';
+        //查看每个人身上是否都有active名字
+        var onoff = null;
+		if(inp.every(function(a,b){
+			return a.classList.contains('active2')
+		})){
+			alert(1)
+			onoff = true;
+                enroll1.disabled = '';
+                enroll1.classList.add('active3');
+                
+		}
+        
+        
+        
+        
+		//提交点击
+        enroll1.onclick = function() {
+        	if(onoff){
+        		var net = form.net.value;
+            open(net);
+        	}
+            
         }
 
 
