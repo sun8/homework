@@ -213,10 +213,10 @@
 .enroll1 {
     width: 117px;
     height: 35px;
-    border: 1px #43952e solid;
+    border: 1px #ccc solid;
     margin: 6px 0 0 146px;
     display: inline-block;
-    background-color: #44a52e;
+    background-color: #ccc;
     font: bold 15px/35px "";
     color: #fff;
     text-align: center;
@@ -281,4 +281,9 @@
 
 .active2 {
     box-shadow: 0 0 2px 2px cadetblue;
+}
+
+.active3 {
+    border: 1px #43952e solid;
+    background-color: #44a52e;
 }

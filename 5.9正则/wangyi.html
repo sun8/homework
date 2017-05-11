@@ -48,32 +48,38 @@
                     <div class="address">
                         <p class="clearfix">
                             <label for="pass" class="add fl"><span class="mark">*</span>密码</label>
-                            <input type="password" value="" id="pass" class="pas fl" name="passwor"/>
+                            <input type="password" value="" id="pass" class="pas fl" name="passwor" />
                         </p>
                         <p class="parter2">6～16个字符，区分大小写</p>
                     </div>
                     <div class="address">
                         <p class="clearfix">
                             <label for="pass3" class="add fl"><span class="mark">*</span>生日</label>
-                            <input type="text" value="" id="pass3" class="pas fl" name="birstday"/>
+                            <input type="text" value="" id="pass3" class="pas fl" name="birstday" />
                         </p>
                     </div>
                     <div class="address">
                         <p class="clearfix">
                             <label for="pass1" class="add fl"><span class="mark">*</span>手机号</label>
-                            <input type="text" value="" id="pass1" class="pas fl" name="plone"/>
+                            <input type="text" value="" id="pass1" class="pas fl" name="plone" />
                         </p>
                     </div>
                     <div class="address">
                         <p class="clearfix">
                             <label for="pass2" class="add fl"><span class="mark">*</span>QQ号</label>
-                            <input type="text" value="" id="pass2" class="pas fl" name = "qq"/>
+                            <input type="text" value="" id="pass2" class="pas fl" name="qq" />
+                        </p>
+                    </div>
+                    <div class="address">
+                        <p class="clearfix">
+                            <label for="net" class="add fl"><span class="mark">*</span>网址</label>
+                            <input type="text" value="" id="net" class="pas fl" name="net" />
                         </p>
                     </div>
                     <div class="address">
                         <p class="clearfix">
                             <label for="pass" class="add fl"><span class="mark">*</span>确认密码</label>
-                            <input type="password" value="" id="pass" class="pas fl" name="surepass"/>
+                            <input type="password" value="" id="pass" class="pas fl" name="surepass" />
                         </p>
                         <p class="parter2">请再次填写密码</p>
                     </div>
@@ -93,8 +99,8 @@
                         <p class="writing fl">同意<a href="#">“服务条款”</a>和<a href="#">“隐私权相关政策”</a></p>
                     </div>
                     <div>
-                        <input type="submit" name="" value="" id="enroll" />
-                        <label for="enroll" class="enroll1">立即注册</label>
+                        <input type="button" name="" value="" id="enrol2" />
+                        <label for="enrol2" class="enroll1">立即注册</label>
                     </div>
                 </form>
                 <div class="flow fl">
@@ -117,70 +123,200 @@
         </div>
     </div>
     <script>
-    	var form = document.getElementsByTagName('form')[0];
-    	//邮箱
-    	form.em.oninput = function(){
-    		var re = /^[a-zA-Z]\w{5,17}$/;
-    		if(re.test(this.value)){
-    			this.classList.add('active2')
-    			console.log(1)
-    		}else{
-    			this.classList.add('active1')
-    			this.classList.remove('active2')
-    		}
-    	}
-    	//密码
-    	form.passwor.oninput = function(){
-    		var re = /^\w{6,16}$/;
-    		if(re.test(this.value)){
-    			this.classList.add('active2')
-    		}else{
-    			this.classList.add('active1')
-    			this.classList.remove('active2')
-    		}
-    	}
-    	//手机
-    	form.plone.oninput = function(){
-    		var re = /^1[3567][0-9]{9}$/;
-    		if(re.test(this.value)){
-    			this.classList.add('active2')
-    		}else{
-    			this.classList.add('active1')
-    			this.classList.remove('active2')
-    		}
-    	}
-    	//QQ
-    	form.qq.oninput = function(){
-    		var re = /^[1-9][0-9]{4,9}$/;
-    		if(re.test(this.value)){
-    			this.classList.add('active2')
-    		}else{
-    			this.classList.add('active1')
-    			this.classList.remove('active2')
-    		}
-    	}
-    	//生日
-    	form.birstday.oninput = function(){
-    		var data = new Date();
-    		var year = data.getFullYear();
-    		var mouth = data.getMonth()+1;
-    		var day = data.getDate();
-    		var str = '';
-    		console.log(data)
-    		mouth = mouth<10?'0'+mouth:mouth;
-    		day = day<10?'0'+day:day;
-    		str = year +'-'+mouth + '-' + day;
-    		//var re = new RegExp(year +'-'+mouth + '-' + day);
-    		var re = /^(\d{4}-\d{2}-\d{2})$/g;
-    		console.log(this.value,str)
-    		if(this.value<=str && re.test(this.value)){
-    			this.classList.add('active2')
-    		}else{
-    			this.classList.add('active1')
-    			this.classList.remove('active2')
-    		}
-    	}
+        function Fn(ele, re) {
+            this.form = document.getElementsByTagName('form')[0];
+            this.onoff = null;
+            this.arr = [];
+            this.init(ele, re);
+        }
+        Fn.prototype.init = function(ele, re) {
+            var _this = this;
+            this.form[ele].oninput = function() {
+
+                _this.change(this, re);
+
+            }
+        }
+        Fn.prototype.change = function(that, re) {
+            if (re.test(that.value)) {
+                that.classList.add('active2')
+                this.onoff = true;
+            } else {
+                that.classList.add('active1')
+                that.classList.remove('active2')
+            }
+            if (!that.value) {
+                that.classList.remove('active1')
+            }
+        }
+
+
+        function Fn1(ele, re) {
+            this.form = document.getElementsByTagName('form')[0]; //value值要小于等于当前戳的时间点
+            this.data = new Date();
+            this.year = this.data.getFullYear();
+            this.mouth = this.data.getMonth() + 1;
+            this.day = this.data.getDate();
+            this.str = this.year + '-' + two(this.mouth) + '-' + two(this.day);
+            //正则匹配格式及长度
+            // var re = /^(\d{4}-\d{2}-\d{2})$/g;
+            //拿value去设置时间，然后获取时间，然后比较是否相等
+            this.init(ele, re);
+        }
+        Fn1.prototype.init = function(ele, re) {
+            var _this = this;
+            this.form[ele].oninput = function() {
+                _this.arr = _this.form[ele].value.split('-');
+                _this.change(this, re, _this.arr);
+            }
+        }
+        Fn1.prototype.change = function(that, re, arr) {
+            this.data1 = new Date();
+            this.data1.setFullYear(arr[0]);
+            this.data1.setMonth(arr[1] - 1);
+            this.data1.setDate(arr[2]);
+            this.year1 = this.data1.getFullYear();
+            this.mouth1 = this.data1.getMonth() + 1;
+            this.day1 = this.data1.getDate();
+            this.str1 = this.year1 + '-' + two(this.mouth1) + '-' + two(this.day1);
+            if (that.value <= this.str && re.test(that.value) && that.value == this.str1) {
+                that.classList.add('active2')
+                onoff = true;
+            } else {
+                that.classList.add('active1')
+                that.classList.remove('active2')
+            }
+            if (!that.value) {
+                that.classList.remove('active1')
+            }
+        }
+
+
+        var email = new Fn('em', /^[a-zA-Z]\w{5,17}$/);
+        var passwor = new Fn('passwor', /^\w{6,16}$/);
+        var plone = new Fn('plone', /^1[34578][0-9]{9}$/);
+        var qq = new Fn('qq', /^[1-9][0-9]{4,9}$/);
+        var net = new Fn('net', /[a-zA-Z]+:\/\/[^\s]*/);
+        var birstday = new Fn1('birstday', /^(\d{4}-\d{2}-\d{2})$/g);
+
+
+        var form = document.getElementsByTagName('form')[0];
+        var inps = form.getElementsByTagName('input');
+        var enrol2 = document.getElementById('enrol2');
+        enrol2.disabled = 'disabled';
+        for (var i = 0; i < inps.length - 2; i++) {
+            if (inps[i].classList.contains('active2')) {
+                enrol2.disabled = '';
+            }
+        }
+
+        enrol2.onclick = function() {
+            var net = form.net.value;
+            this.classList.add('active3')
+            open(net)
+        }
+
+
+        //补零
+        function two(n) {
+            return n < 10 ? '0' + n : '' + n;
+        }
     </script>
+
+    <!--<script>
+        var form = document.getElementsByTagName('form')[0];
+        //邮箱
+        form.em.oninput = function() {
+                var re = /^[a-zA-Z]\w{5,17}$/;
+                if (re.test(this.value)) {
+                    this.classList.add('active2')
+                } else {
+                    this.classList.add('active1')
+                    this.classList.remove('active2')
+                }
+                if (!this.value) {
+                    this.classList.remove('active1')
+                }
+            }
+            //密码
+        form.passwor.oninput = function() {
+                var re = /^\w{6,16}$/;
+                if (re.test(this.value)) {
+                    this.classList.add('active2')
+                } else {
+                    this.classList.add('active1')
+                    this.classList.remove('active2')
+                }
+                if (!this.value) {
+                    this.classList.remove('active1')
+                }
+            }
+            //手机
+        form.plone.oninput = function() {
+                var re = /^1[34578][0-9]{9}$/;
+                if (re.test(this.value)) {
+                    this.classList.add('active2')
+                } else {
+                    this.classList.add('active1')
+                    this.classList.remove('active2')
+                }
+                if (!this.value) {
+                    this.classList.remove('active1')
+                }
+            }
+            //QQ
+        form.qq.oninput = function() {
+                var re = /^[1-9][0-9]{4,9}$/;
+                if (re.test(this.value)) {
+                    this.classList.add('active2')
+                } else {
+                    this.classList.add('active1')
+                    this.classList.remove('active2')
+                }
+                if (!this.value) {
+                    this.classList.remove('active1')
+                }
+            }
+            //生日
+        form.birstday.oninput = function() {
+                //value值要小于等于当前戳的时间点
+                var data = new Date();
+                var year = data.getFullYear();
+                var mouth = data.getMonth() + 1;
+                var day = data.getDate();
+                var str = '';
+                str = year + '-' + two(mouth) + '-' + two(day);
+                //正则匹配格式及长度
+                var re = /^(\d{4}-\d{2}-\d{2})$/g;
+                //拿value去设置时间，然后获取时间，然后比较是否相等
+                var arr = this.value.split('-');
+                var data1 = new Date();
+                data1.setFullYear(arr[0]);
+                data1.setMonth(arr[1] - 1);
+                data1.setDate(arr[2]);
+                var year1 = data1.getFullYear();
+                var mouth1 = data1.getMonth() + 1;
+                var day1 = data1.getDate();
+                var str1 = '';
+                str1 = year1 + '-' + two(mouth1) + '-' + two(day1);
+
+                if (this.value <= str && re.test(this.value) && this.value == str1) {
+                    this.classList.add('active2')
+                } else {
+                    this.classList.add('active1')
+                    this.classList.remove('active2')
+                }
+                if (!this.value) {
+                    this.classList.remove('active1')
+                }
+            }
+            //补零
+        function two(n) {
+            return n < 10 ? '0' + n : '' + n;
+        }
+    </script>
+    -->
+
 </body>
 
 </html>
