@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>拖拽</title>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            background: palevioletred;
+            position: absolute;
+            left: 0;
+            top: 0;
+            //box-sizing: border-box;
+        }
+    </style>
+</head>
+
+<body>
+    <div></div>
+    <script>
+        // 面向过程
+        // var div = document.getElementsByTagName('div')[0];
+        // div.addEventListener('mousedown', function(ev) {
+        //     ev.preventDefault();
+        //     var armove = null;
+        //     var disX = ev.clientX - div.getBoundingClientRect().left;
+        //     var disY = ev.clientY - div.getBoundingClientRect().top;
+        //     document.addEventListener('mousemove', function(ev) {
+        //         if (ev.which == 1) {
+        //             armove = arguments.callee;
+        //             div.style.left = ev.clientX - disX + 'px';
+        //             div.style.top = ev.clientY - disY + 'px';
+        //         }
+        //     })
+        //     document.addEventListener('mouseup', function(ev) {
+        //         document.removeEventListener('mousemove', armove);
+        //         document.addEventListener('mouseup', arguments.callee)
+        //     })
+        // });
+        // 面向对象
+        function Drag(div) {
+            this.div = document.getElementsByTagName(div)[0];
+            var _this = this;
+            this.div.addEventListener('mousedown', function(ev) {
+                ev = ev || window.event;
+                _this.down(ev)
+            })
+        }
+        Drag.prototype.down = function(ev) {
+            ev = ev || window.event;
+            ev.preventDefault();
+            var _this = this;
+            this.disX = ev.clientX - this.div.getBoundingClientRect().left;
+            this.disY = ev.clientY - this.div.getBoundingClientRect().top;
+            document.addEventListener('mousemove', function(ev) {
+                ev = ev || window.event;
+                _this.armove = arguments.callee;
+                _this.move(ev);
+            })
+            document.addEventListener('mouseup', function(ev) {
+                ev = ev || window.event;
+                _this.arup = arguments.callee;
+                _this.up(ev, _this.armove, _this.arup);
+            })
+        }
+        Drag.prototype.move = function(ev) {
+            ev = ev || window.event;
+            if (ev.which == 1) {
+                this.div.style.left = ev.clientX - this.disX + 'px';
+                this.div.style.top = ev.clientY - this.disY + 'px';
+            }
+        }
+        Drag.prototype.up = function(ev, armove, arup) {
+            document.removeEventListener('mousemove', armove);
+            document.addEventListener('mouseup', arup)
+        }
+        new Drag('div');
+    </script>
+</body>
+
+</html>

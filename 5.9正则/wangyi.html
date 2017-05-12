@@ -186,7 +186,6 @@
             if (!that.value) {
                 that.classList.remove('active1');
             }
-
         }
         Fn.prototype.change1 = function(that, re, arr) {
             //value值要小于等于当前戳的时间点
@@ -196,7 +195,6 @@
             this.day = this.data.getDate();
             this.str = this.year + '-' + two(this.mouth) + '-' + two(this.day);
             //正则匹配格式及长度
-            // var re = /^(\d{4}-\d{2}-\d{2})$/g;
             //拿value去设置时间，然后获取时间，然后比较是否相等
             this.data1 = new Date();
             this.data1.setFullYear(arr[0]);
@@ -258,7 +256,6 @@
                     var net = form.net.value;
                     open(net);
                 }
-
             }
             //补零
         function two(n) {
