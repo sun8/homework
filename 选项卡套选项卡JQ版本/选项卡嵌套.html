@@ -1,0 +1,196 @@
+<!DOCTYPE html >
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>选项卡嵌套</title>
+    <style type="text/css">
+        li {
+            list-style: none;
+            cursor: pointer;
+        }
+        
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+        
+        #box {
+            border: 5px solid #E7E7E7;
+            height: 400px;
+            width: 800px;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+        
+        #box>ul {
+            width: 100px;
+            height: 100%;
+            float: left;
+        }
+        
+        #box>ul li {
+            line-height: 99px;
+            text-align: center;
+            background-color: palevioletred;
+            border-bottom: 1px solid #E7E7E7;
+            color: white;
+        }
+        
+        #box>ul .active {
+            background-color: burlywood;
+            color: blueviolet;
+        }
+        
+        #box div {
+            float: left;
+            width: 700px;
+            height: 100%;
+            position: relative;
+            display: none;
+        }
+        
+        #box img {
+            width: 100%;
+            height: 100%;
+        }
+        
+        #box div ul {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+        
+        #box div li {
+            float: left;
+            border-right: 1px solid white;
+            background-color: black;
+            opacity: .7;
+            line-height: 30px;
+            margin-right: -1px;
+            color: white;
+            text-align: center;
+        }
+        
+        #box div .active {
+            background-color: #EF3163;
+        }
+        
+        #box .act {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <section id="box"></section>
+</body>
+
+</html>
+<script src="jquery-3.2.1.js"></script>
+<script type="text/javascript">
+    var data = [{
+        title: '暖色调',
+        imgs: ['images/img1.gif', 'images/img2.gif', 'images/img3.gif', 'images/img4.gif'],
+        txt: ['春水如生', '春林如盛', '春风十里', '不如你']
+    }, {
+        title: '金色夕阳',
+        imgs: ['images/img5.gif', 'images/img6.gif'],
+        txt: ['三里桃花', '不及卿']
+    }, {
+        title: '灰色格调',
+        imgs: ['images/img7.gif', 'images/img8.gif', 'images/img9.gif', 'images/img10.gif'],
+        txt: ['街边夕阳', '金色稻草', '风升鹤起', '夕阳西下']
+    }, {
+        title: 'baby',
+        imgs: ['images/img11.gif', 'images/img12.gif'],
+        txt: ['三生三世', '十里桃花']
+    }];
+    //样式渲染
+    var str = '';
+    //左侧结构
+    str = '<ul id="ul1">';
+    $(data).each(function(i, ele) {
+        str += '<li>' + ele.title + '</li>';
+    })
+    str += '</ul>';
+    //右侧结构
+    $(data).each(function(i, ele) {
+        str += '<div><img src="' + ele.imgs[0] + '"/><ul>';
+        for (var j = 0; j < ele.imgs.length; j++) {
+            str += '<li style="width:' + 700 / ele.imgs.length + 'px;">' + ele.txt[j] + '</li>';
+        }
+        str += '</ul></div>';
+    })
+    $('#box').html(str)
+
+    //初始化
+    $('li:first').addClass('active');
+    $('div:first').addClass('act');
+    let $lis = $('.act').find('li');
+    let $img = $('.act').find('img');
+    $lis.eq(0).addClass('active')
+    let $liLeft = $('#ul1').find('li');
+
+    //左边li变量
+    var numLeft = 0;
+    //右变量
+    var num = 0;
+    var timer = null;
+
+    tab();
+    //右边点击
+    function tab() {
+        $lis.click(function() {
+            num = $(this).index();
+            Rig()
+        })
+    }
+
+
+    //左边点击
+    $liLeft.click(function() {
+        numLeft = $(this).index();
+        Left();
+        $lis = $('.act').find('li');
+        $img = $('.act').find('img');
+        $lis.eq(0).addClass('active').siblings('li').removeClass('active');
+        tab();
+    })
+
+    function autoPlay() {
+        num++;
+        const len = data[numLeft].imgs.length;
+        if (num > len - 1) { //左边切完，右边加1，左边从0开始
+            numLeft++;
+            num = 0;
+            if (numLeft > $liLeft.get().length - 1) { //右边切完从0开始
+                numLeft = 0;
+            }
+            Left();
+        }
+        Rig();
+    }
+
+    timer = setInterval(autoPlay, 1000); //计时器开始
+    $('#box').hover(function() {
+        clearInterval(timer); //移入box计时器关闭
+    }, function() {
+        clearInterval(timer);
+        timer = setInterval(autoPlay, 1000); //移出box计时器开始
+    })
+
+
+    //左切换效果
+    function Left() {
+        $liLeft.eq(numLeft).addClass('active').siblings('li').removeClass('active');
+        $('div').eq(numLeft).addClass('act').siblings('div').removeClass('act');
+    }
+    //右切换效果
+    function Rig() {
+        let $lis = $('.act').find('li');
+        let $img = $('.act').find('img');
+        $lis.eq(num).addClass('active').siblings('li').removeClass('active');
+        $img.attr('src', data[numLeft].imgs[$lis.eq(num).index()])
+    }
+</script>
